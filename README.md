@@ -8,11 +8,33 @@
 
 ---
 
+## 主题预览
+
+### 深色模式
+
+| 首页 | 代理 | 订阅 |
+|------|------|------|
+| ![深色-首页](docs/screenshots/01-home-dark.png) | ![深色-代理](docs/screenshots/02-proxies-dark.png) | ![深色-订阅](docs/screenshots/03-profiles-dark.png) |
+
+### 浅色模式
+
+| 首页 | 代理 | 订阅 |
+|------|------|------|
+| ![浅色-首页](docs/screenshots/04-home-light.png) | ![浅色-代理](docs/screenshots/05-proxies-light.png) | ![浅色-订阅](docs/screenshots/06-profiles-light.png) |
+
+### 主题设置（主配色 + CSS 注入位置）
+
+<img src="docs/screenshots/07-theme-settings.png" alt="主题设置" width="480">
+
+> 截图中的节点均为演示占位数据，不含任何真实节点或订阅信息。
+
+---
+
 ## 快速开始（30 秒）
 
 1. 打开 **Clash Verge** → **设置** → **外观设置 / Theme Setting** → **编辑 CSS**
 2. 粘贴下面这一行代码
-3. 主题模式建议**固定为深色**（主色需手动填，选「系统」会在切换时暴露浅色默认蓝）
+3. 主题模式建议**固定为深色**
 4. 保存并重启 Clash Verge
 
 ```css
@@ -29,29 +51,29 @@
 
 ### 深色模式（Dark）
 
-| 设置项 | 色值 |
-|--------|------|
-| 主要颜色 | `#D0BCFF` |
-| 次要颜色 | `#CCC2DC` |
-| 文本主要颜色 | `#E6E0E9` |
-| 文本次要颜色 | `#CAC4D0` |
-| 信息颜色 | `#D0BCFF` |
-| 警告颜色 | `#F5C25B` |
-| 错误颜色 | `#F2B8B5` |
-| 成功颜色 | `#8BD8A0` |
+| 预览 | 设置项 | 色值 |
+|------|--------|------|
+| ![](docs/swatches/dark-primary.svg) | 主要颜色 | `#D0BCFF` |
+| ![](docs/swatches/dark-secondary.svg) | 次要颜色 | `#CCC2DC` |
+| ![](docs/swatches/dark-text-primary.svg) | 文本主要颜色 | `#E6E0E9` |
+| ![](docs/swatches/dark-text-secondary.svg) | 文本次要颜色 | `#CAC4D0` |
+| ![](docs/swatches/dark-info.svg) | 信息颜色 | `#D0BCFF` |
+| ![](docs/swatches/dark-warning.svg) | 警告颜色 | `#F5C25B` |
+| ![](docs/swatches/dark-error.svg) | 错误颜色 | `#F2B8B5` |
+| ![](docs/swatches/dark-success.svg) | 成功颜色 | `#8BD8A0` |
 
 ### 浅色模式（Light）
 
-| 设置项 | 色值 |
-|--------|------|
-| 主要颜色 | `#6750A4` |
-| 次要颜色 | `#625B71` |
-| 文本主要颜色 | `#1D1B20` |
-| 文本次要颜色 | `#49454F` |
-| 信息颜色 | `#6750A4` |
-| 警告颜色 | `#9A6700` |
-| 错误颜色 | `#B3261E` |
-| 成功颜色 | `#1E8E4E` |
+| 预览 | 设置项 | 色值 |
+|------|--------|------|
+| ![](docs/swatches/light-primary.svg) | 主要颜色 | `#6750A4` |
+| ![](docs/swatches/light-secondary.svg) | 次要颜色 | `#625B71` |
+| ![](docs/swatches/light-text-primary.svg) | 文本主要颜色 | `#1D1B20` |
+| ![](docs/swatches/light-text-secondary.svg) | 文本次要颜色 | `#49454F` |
+| ![](docs/swatches/light-info.svg) | 信息颜色 | `#6750A4` |
+| ![](docs/swatches/light-warning.svg) | 警告颜色 | `#9A6700` |
+| ![](docs/swatches/light-error.svg) | 错误颜色 | `#B3261E` |
+| ![](docs/swatches/light-success.svg) | 成功颜色 | `#1E8E4E` |
 
 > 以上色值来自 Google 官方 Material Theme Builder 的 Light/Dark 标准色板，对比度符合 WCAG 无障碍标准。
 
