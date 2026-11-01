@@ -1,10 +1,14 @@
 # Clash Verge — Material Design 3 主题
 
+---
+
 免费开源的 **Clash Verge Rev CSS 主题**，基于 **Google Material Design 3 (M3)** 设计语言，为 Clash Verge 带来统一、现代、克制的视觉风格。
 
 - 深色 / 浅色双主题，跟随系统自动切换
 - 全圆角控件、胶囊 Chip、elevation 层级阴影
 - 通过 Clash Verge 官方 **CSS Injection** 即可使用，无需改源码
+
+---
 
 ## 主题预览
 
