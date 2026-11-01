@@ -47,7 +47,7 @@
 
 主题设置界面如下：
 
-![主题设置](docs/screenshots/07-theme-settings.png)
+<img src="docs/screenshots/07-theme-settings.png" alt="主题设置" width="360">
 
 #### 深色模式（Dark）
 
