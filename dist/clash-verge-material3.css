@@ -1,0 +1,851 @@
+/* ============================================================
+   Clash Verge — Material Design 3 Theme
+   ------------------------------------------------------------
+   设计语言   Google Material Design 3 (M3)
+              · 深 / 浅双主题，跟随系统自动切换
+              · 全圆角控件、胶囊 Chip、elevation 层级阴影
+
+   授权       MIT License
+   依赖       基于 Clash Verge Rev 的公开 DOM 结构与 MUI 组件约定编写，
+              随 Clash Verge 版本更新可能需要调整
+   字体       twemoji 以 CDN 链接引用（CC-BY 4.0）
+   ============================================================ */
+
+/* 自定义字体 */
+@font-face {
+  font-family: 'cv-emoji';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://cdn.jsdelivr.net/npm/twemoji-colr-font@15.0.3/twemoji.woff2')
+    format('woff2');
+  unicode-range: U+1F1E6-1F1FF, U+1F300-1F5FF, U+1F600-1F64F, U+1F680-1F6FF,
+    U+1F700-1F77F, U+1F780-1F7FF, U+1F800-1F8FF, U+1F900-1F9FF, U+1FA00-1FAFF,
+    U+2600-26FF, U+2700-27BF, U+FE00-FE0F, U+200D, U+20E3, U+E0061-E007F;
+}
+
+/* 根级变量（深色为默认基准） */
+:root,
+body {
+  /* M3 色板 — 深色主题 */
+  --cv-primary: #d0bcff;
+  --cv-on-primary: #381e72;
+  --cv-primary-container: #4f378b;
+  --cv-on-primary-container: #eaddff;
+
+  --cv-secondary: #ccc2dc;
+  --cv-on-secondary: #332d41;
+  --cv-secondary-container: #4a4458;
+  --cv-on-secondary-container: #e8def8;
+
+  --cv-tertiary: #efb8c8;
+  --cv-on-tertiary: #492532;
+  --cv-tertiary-container: #633b48;
+  --cv-on-tertiary-container: #ffd8e2;
+
+  --cv-success: #8bd8a0;
+  --cv-warning: #f5c25b;
+  --cv-error: #f2b8b5;
+  --cv-on-error: #601410;
+
+  --cv-bg-primary: #141218;
+  --cv-bg-secondary: #1c1b20;
+  --cv-surface: #141218;
+  --cv-surface-container-lowest: #0f0d13;
+  --cv-surface-container-low: #1d1b22;
+  --cv-surface-container: #211f26;
+  --cv-surface-container-high: #2b2930;
+  --cv-surface-container-highest: #36343b;
+  --cv-surface-elevated: #211f26;
+  --cv-surface-card: #1d1b22;
+
+  --cv-text-primary: #e6e0e9;
+  --cv-text-secondary: #cac4d0;
+
+  --cv-outline: #938f99;
+  --cv-outline-variant: #49454f;
+
+  /* 延迟指示 */
+  --cv-latency-fast: var(--cv-success);
+  --cv-latency-medium: var(--cv-warning);
+  --cv-latency-slow: #f7b26a;
+  --cv-latency-timeout: var(--cv-error);
+
+  /* 间距 */
+  --cv-space-1: 4px;
+  --cv-space-2: 8px;
+  --cv-space-3: 12px;
+  --cv-space-4: 16px;
+  --cv-space-6: 24px;
+  --cv-space-8: 32px;
+  --cv-space-12: 48px;
+  --cv-space-16: 64px;
+
+  /* M3 圆角（shape tokens） */
+  --cv-radius-xs: 4px;
+  --cv-radius-sm: 8px;
+  --cv-radius-md: 12px;
+  --cv-radius-lg: 16px;
+  --cv-radius-xl: 28px;
+  --cv-radius-full: 999px;
+
+  /* M3 标准动效 */
+  --cv-motion-fast: 100ms;
+  --cv-motion-normal: 200ms;
+  --cv-motion-slow: 300ms;
+  --cv-motion-ease: cubic-bezier(0.2, 0, 0, 1);
+  --cv-motion-emphasized: cubic-bezier(0.2, 0, 0, 1);
+
+  /* 边框（M3 outline 体系） */
+  --cv-border-subtle: var(--cv-outline-variant);
+  --cv-border-strong: var(--cv-outline);
+  --cv-border-focus: var(--cv-primary);
+
+  /* M3 elevation 阴影 */
+  --cv-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --cv-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --cv-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --cv-elevation-4: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.3);
+  --cv-elevation-5: 0 8px 12px 6px rgba(0, 0, 0, 0.15), 0 4px 4px rgba(0, 0, 0, 0.3);
+
+  --cv-effect-glow: none;
+  --cv-effect-blur: 0px;
+  --cv-ambient: none;
+
+  /* 字体栈 */
+  --cv-font-sans: 'Roboto', 'Microsoft YaHei UI', 'Microsoft YaHei',
+    'PingFang SC', 'Noto Sans SC', -apple-system, BlinkMacSystemFont,
+    'Helvetica Neue', Arial, system-ui, sans-serif, 'cv-emoji',
+    'twemoji mozilla', 'Apple Color Emoji';
+  --cv-font-mono: 'Roboto Mono', ui-monospace, 'JetBrains Mono',
+    'Cascadia Mono', Consolas, monospace, 'cv-emoji', 'twemoji mozilla',
+    'Apple Color Emoji';
+  --cv-font-display: 'Roboto', var(--cv-font-sans);
+
+  /* 滚动条与选中文本 */
+  --cv-scrollbar-bg: var(--cv-bg-primary);
+  --cv-scrollbar-thumb: var(--cv-outline-variant);
+  --cv-selection-fg: var(--cv-text-primary);
+}
+
+/* 浅色主题 */
+@media (prefers-color-scheme: light) {
+  body {
+    --cv-primary: #6750a4;
+    --cv-on-primary: #ffffff;
+    --cv-primary-container: #eaddff;
+    --cv-on-primary-container: #21005d;
+
+    --cv-secondary: #625b71;
+    --cv-on-secondary: #ffffff;
+    --cv-secondary-container: #e8def8;
+    --cv-on-secondary-container: #1d192b;
+
+    --cv-tertiary: #7d5260;
+    --cv-on-tertiary: #ffffff;
+    --cv-tertiary-container: #ffd8e2;
+    --cv-on-tertiary-container: #31111d;
+
+    --cv-success: #1e8e4e;
+    --cv-warning: #9a6700;
+    --cv-error: #b3261e;
+    --cv-on-error: #ffffff;
+
+    --cv-bg-primary: #fef7ff;
+    --cv-bg-secondary: #f3edf7;
+    --cv-surface: #fef7ff;
+    --cv-surface-container-lowest: #ffffff;
+    --cv-surface-container-low: #f7f2fa;
+    --cv-surface-container: #f3edf7;
+    --cv-surface-container-high: #ece6f0;
+    --cv-surface-container-highest: #e6e0e9;
+    --cv-surface-elevated: #f3edf7;
+    --cv-surface-card: #f7f2fa;
+
+    --cv-text-primary: #1d1b20;
+    --cv-text-secondary: #49454f;
+
+    --cv-outline: #79747e;
+    --cv-outline-variant: #cac4d0;
+
+    --cv-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+    --cv-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+    --cv-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+    --cv-elevation-4: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.3);
+    --cv-elevation-5: 0 8px 12px 6px rgba(0, 0, 0, 0.15), 0 4px 4px rgba(0, 0, 0, 0.3);
+
+    --cv-scrollbar-bg: var(--cv-bg-primary);
+    --cv-scrollbar-thumb: var(--cv-outline-variant);
+    --cv-selection-fg: #ffffff;
+  }
+}
+
+html[data-theme='light'] body {
+  --cv-primary: #6750a4;
+  --cv-on-primary: #ffffff;
+  --cv-primary-container: #eaddff;
+  --cv-on-primary-container: #21005d;
+  --cv-secondary: #625b71;
+  --cv-on-secondary: #ffffff;
+  --cv-secondary-container: #e8def8;
+  --cv-on-secondary-container: #1d192b;
+  --cv-tertiary: #7d5260;
+  --cv-on-tertiary: #ffffff;
+  --cv-tertiary-container: #ffd8e2;
+  --cv-on-tertiary-container: #31111d;
+  --cv-success: #1e8e4e;
+  --cv-warning: #9a6700;
+  --cv-error: #b3261e;
+  --cv-on-error: #ffffff;
+  --cv-bg-primary: #fef7ff;
+  --cv-bg-secondary: #f3edf7;
+  --cv-surface: #fef7ff;
+  --cv-surface-container-lowest: #ffffff;
+  --cv-surface-container-low: #f7f2fa;
+  --cv-surface-container: #f3edf7;
+  --cv-surface-container-high: #ece6f0;
+  --cv-surface-container-highest: #e6e0e9;
+  --cv-surface-elevated: #f3edf7;
+  --cv-surface-card: #f7f2fa;
+  --cv-text-primary: #1d1b20;
+  --cv-text-secondary: #49454f;
+  --cv-outline: #79747e;
+  --cv-outline-variant: #cac4d0;
+  --cv-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --cv-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --cv-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --cv-elevation-4: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.3);
+  --cv-elevation-5: 0 8px 12px 6px rgba(0, 0, 0, 0.15), 0 4px 4px rgba(0, 0, 0, 0.3);
+  --cv-scrollbar-bg: var(--cv-bg-primary);
+  --cv-scrollbar-thumb: var(--cv-outline-variant);
+  --cv-selection-fg: #ffffff;
+}
+
+/* 深色主题 */
+@media (prefers-color-scheme: dark) {
+  body {
+    --cv-primary: #d0bcff;
+    --cv-on-primary: #381e72;
+    --cv-primary-container: #4f378b;
+    --cv-on-primary-container: #eaddff;
+    --cv-secondary: #ccc2dc;
+    --cv-on-secondary: #332d41;
+    --cv-secondary-container: #4a4458;
+    --cv-on-secondary-container: #e8def8;
+    --cv-tertiary: #efb8c8;
+    --cv-on-tertiary: #492532;
+    --cv-tertiary-container: #633b48;
+    --cv-on-tertiary-container: #ffd8e2;
+    --cv-success: #8bd8a0;
+    --cv-warning: #f5c25b;
+    --cv-error: #f2b8b5;
+    --cv-on-error: #601410;
+    --cv-bg-primary: #141218;
+    --cv-bg-secondary: #1c1b20;
+    --cv-surface: #141218;
+    --cv-surface-container-lowest: #0f0d13;
+    --cv-surface-container-low: #1d1b22;
+    --cv-surface-container: #211f26;
+    --cv-surface-container-high: #2b2930;
+    --cv-surface-container-highest: #36343b;
+    --cv-surface-elevated: #211f26;
+    --cv-surface-card: #1d1b22;
+    --cv-text-primary: #e6e0e9;
+    --cv-text-secondary: #cac4d0;
+    --cv-outline: #938f99;
+    --cv-outline-variant: #49454f;
+    --cv-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+    --cv-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+    --cv-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+    --cv-elevation-4: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.3);
+    --cv-elevation-5: 0 8px 12px 6px rgba(0, 0, 0, 0.15), 0 4px 4px rgba(0, 0, 0, 0.3);
+    --cv-scrollbar-bg: var(--cv-bg-primary);
+    --cv-scrollbar-thumb: var(--cv-outline-variant);
+    --cv-selection-fg: var(--cv-text-primary);
+  }
+}
+
+html[data-theme='dark'] body {
+  --cv-primary: #d0bcff;
+  --cv-on-primary: #381e72;
+  --cv-primary-container: #4f378b;
+  --cv-on-primary-container: #eaddff;
+  --cv-secondary: #ccc2dc;
+  --cv-on-secondary: #332d41;
+  --cv-secondary-container: #4a4458;
+  --cv-on-secondary-container: #e8def8;
+  --cv-tertiary: #efb8c8;
+  --cv-on-tertiary: #492532;
+  --cv-tertiary-container: #633b48;
+  --cv-on-tertiary-container: #ffd8e2;
+  --cv-success: #8bd8a0;
+  --cv-warning: #f5c25b;
+  --cv-error: #f2b8b5;
+  --cv-on-error: #601410;
+  --cv-bg-primary: #141218;
+  --cv-bg-secondary: #1c1b20;
+  --cv-surface: #141218;
+  --cv-surface-container-lowest: #0f0d13;
+  --cv-surface-container-low: #1d1b22;
+  --cv-surface-container: #211f26;
+  --cv-surface-container-high: #2b2930;
+  --cv-surface-container-highest: #36343b;
+  --cv-surface-elevated: #211f26;
+  --cv-surface-card: #1d1b22;
+  --cv-text-primary: #e6e0e9;
+  --cv-text-secondary: #cac4d0;
+  --cv-outline: #938f99;
+  --cv-outline-variant: #49454f;
+  --cv-elevation-1: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --cv-elevation-2: 0 1px 2px rgba(0, 0, 0, 0.3), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --cv-elevation-3: 0 4px 8px 3px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --cv-elevation-4: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px rgba(0, 0, 0, 0.3);
+  --cv-elevation-5: 0 8px 12px 6px rgba(0, 0, 0, 0.15), 0 4px 4px rgba(0, 0, 0, 0.3);
+  --cv-scrollbar-bg: var(--cv-bg-primary);
+  --cv-scrollbar-thumb: var(--cv-outline-variant);
+  --cv-selection-fg: var(--cv-text-primary);
+}
+
+/* 焦点可见性 */
+:focus-visible {
+  outline: 2px solid var(--cv-border-focus);
+  outline-offset: 2px;
+}
+
+/* 全局过渡 */
+* {
+  transition-property: background-color, border-color, color, box-shadow,
+    opacity;
+  transition-duration: var(--cv-motion-normal);
+  transition-timing-function: var(--cv-motion-ease);
+}
+
+/* 基础全局 */
+html body {
+  font-family: var(--cv-font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 布局容器 */
+html body .MuiPaper-root.layout,
+html body .layout {
+  border: none !important;
+  background: var(--cv-bg-primary) !important;
+  overflow: hidden !important;
+}
+
+html body .layout .layout-content__left {
+  background: var(--cv-surface-container-low) !important;
+  border-right: 1px solid var(--cv-outline-variant) !important;
+  box-shadow: none !important;
+}
+
+/* 菜单 */
+html body .the-menu {
+  padding: 8px;
+}
+
+html body .the-menu .MuiListItemButton-root {
+  min-height: 48px;
+  border-radius: var(--cv-radius-full) !important;
+  margin: 2px 8px;
+  border: none !important;
+  border-left: none !important;
+  transition: background-color var(--cv-motion-normal) var(--cv-motion-ease);
+}
+
+html body .the-menu .MuiListItemButton-root:hover {
+  background-color: var(--cv-surface-container-high) !important;
+}
+
+html body .the-menu .MuiListItemButton-root.Mui-selected {
+  background: var(--cv-secondary-container) !important;
+  box-shadow: none !important;
+  transform: none;
+}
+
+html body .the-menu .MuiListItemButton-root.Mui-selected .MuiListItemText-primary,
+html body .the-menu .MuiListItemButton-root.Mui-selected .MuiSvgIcon-root {
+  color: var(--cv-on-secondary-container) !important;
+  font-weight: 600;
+}
+
+html body .the-menu .MuiListItemButton-root .MuiListItemText-primary {
+  font-size: 0.875rem !important;
+  font-weight: 500;
+  letter-spacing: 0.1px;
+}
+
+/* 页面头部 */
+html body .base-page > header {
+  padding: 12px 16px !important;
+  border-bottom: 1px solid var(--cv-outline-variant) !important;
+  background: var(--cv-surface-container-low) !important;
+}
+
+html body .base-page > header .MuiTypography-root {
+  font-weight: 500 !important;
+  font-size: 1.375rem !important;
+  letter-spacing: 0;
+  text-transform: none !important;
+}
+
+/* 卡片 */
+html body .enhanced-card,
+html body .cv-card,
+html body .base-content .MuiGrid-grid-xs-6 > .MuiBox-root,
+html body .base-content .MuiGrid-root > .MuiBox-root {
+  position: relative !important;
+  background-color: var(--cv-surface-card) !important;
+  background-image: none !important;
+  border: 1px solid var(--cv-outline-variant) !important;
+  border-radius: var(--cv-radius-md) !important;
+  box-shadow: var(--cv-elevation-1) !important;
+  transition: background-color var(--cv-motion-normal) var(--cv-motion-ease),
+    box-shadow var(--cv-motion-normal) var(--cv-motion-ease);
+}
+
+/* 卡片 hover：仅背景色轻微变化 */
+html body .enhanced-card:hover,
+html body .cv-card:hover,
+html body .base-content .MuiGrid-grid-xs-6 > .MuiBox-root:hover,
+html body .enhanced-card:focus-within,
+html body .cv-card:focus-within {
+  background-color: var(--cv-surface-container-high) !important;
+  box-shadow: var(--cv-elevation-1) !important;
+  transform: none !important;
+}
+
+html body .enhanced-card .MuiTypography-h6,
+html body .cv-card .MuiTypography-h6 {
+  font-weight: 500 !important;
+  font-size: 0.8125rem !important;
+  letter-spacing: 0.1px;
+  text-transform: none;
+  color: var(--cv-text-secondary) !important;
+}
+
+/* 内容区文字 */
+html body .base-content .MuiTypography-root {
+  font-family: var(--cv-font-sans);
+  text-shadow: none !important;
+  color: var(--cv-text-primary) !important;
+}
+
+html body .base-content .MuiTypography-colorTextSecondary,
+html body .base-content .MuiTypography-body2 {
+  color: var(--cv-text-secondary) !important;
+}
+
+/* 按钮 */
+html body .MuiButton-root {
+  min-height: 40px;
+  border-radius: var(--cv-radius-full) !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  letter-spacing: 0.1px;
+  text-transform: none;
+  transition: background-color var(--cv-motion-normal) var(--cv-motion-ease),
+    box-shadow var(--cv-motion-normal) var(--cv-motion-ease);
+}
+
+/* 移除按压缩放，改为 M3 状态层反馈 */
+html body .MuiButton-root:active {
+  transform: none;
+}
+
+html body .MuiButton-containedPrimary,
+html body .MuiButtonGroup-groupedContainedPrimary {
+  background-color: var(--cv-primary) !important;
+  color: var(--cv-on-primary) !important;
+  box-shadow: var(--cv-elevation-1) !important;
+}
+
+html body .MuiButton-containedPrimary:hover,
+html body .MuiButtonGroup-groupedContainedPrimary:hover {
+  background-color: var(--cv-primary) !important;
+  box-shadow: var(--cv-elevation-2) !important;
+}
+
+html body .MuiButton-outlinedPrimary,
+html body .MuiButton-outlined {
+  border: 1px solid var(--cv-outline) !important;
+  color: var(--cv-primary) !important;
+  background: transparent !important;
+}
+
+html body .MuiButton-textPrimary,
+html body .MuiButton-text {
+  color: var(--cv-primary) !important;
+  background: transparent !important;
+}
+
+/* Chip 标签（M3 胶囊） */
+html body .MuiChip-root {
+  border-radius: var(--cv-radius-sm) !important;
+  background: var(--cv-secondary-container) !important;
+  color: var(--cv-on-secondary-container) !important;
+}
+
+/* 流量显示组件 */
+html body .the-traffic {
+  display: block;
+  margin: 12px 12px 16px;
+  padding: 12px 16px;
+  border: none;
+  border-radius: var(--cv-radius-md);
+  background: var(--cv-primary-container);
+  box-shadow: var(--cv-elevation-1);
+  font-family: var(--cv-font-mono) !important;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--cv-on-primary-container) !important;
+}
+
+html body .the-traffic::before {
+  content: 'Throughput';
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--cv-font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--cv-on-primary-container);
+  opacity: 0.7;
+}
+
+html body .the-traffic::after {
+  content: none !important;
+  display: none !important;
+}
+
+html body .the-traffic *,
+html body .the-delay {
+  font-family: var(--cv-font-mono) !important;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  text-shadow: none !important;
+}
+
+/* 进度条 */
+html body .MuiLinearProgress-root {
+  background-color: var(--cv-surface-container-highest) !important;
+  border-radius: var(--cv-radius-full) !important;
+}
+
+html body .MuiLinearProgress-bar {
+  background-color: var(--cv-primary) !important;
+}
+
+/* 对话框 */
+html body .MuiDialog-root .MuiDialog-paper {
+  border-radius: var(--cv-radius-xl) !important;
+  border: none !important;
+  background: var(--cv-surface-container-high) !important;
+  box-shadow: var(--cv-elevation-3) !important;
+}
+
+/* 开关（Switch） */
+html body .MuiSwitch-switchBase.Mui-checked {
+  color: var(--cv-on-primary) !important;
+}
+
+html body .MuiSwitch-switchBase.Mui-checked .MuiSwitch-thumb {
+  background-color: var(--cv-on-primary) !important;
+  box-shadow: var(--cv-elevation-1) !important;
+}
+
+html body .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+  background-color: var(--cv-primary) !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+}
+
+html body .MuiSwitch-track {
+  background-color: var(--cv-surface-container-highest) !important;
+  opacity: 1 !important;
+  border-radius: var(--cv-radius-full) !important;
+}
+
+/* 输入框 */
+html body .MuiOutlinedInput-root,
+html body .MuiInputBase-root {
+  border-radius: var(--cv-radius-xs) !important;
+  background: var(--cv-surface-container-highest) !important;
+}
+
+html body .MuiOutlinedInput-notchedOutline {
+  border-color: var(--cv-outline) !important;
+}
+
+html body .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--cv-primary) !important;
+  border-width: 2px !important;
+  box-shadow: none !important;
+}
+
+/* 状态 Chip 颜色 */
+html body .MuiChip-colorSuccess,
+html body [class*='status-success'] {
+  background-color: color-mix(in srgb, var(--cv-success) 16%, transparent) !important;
+  color: var(--cv-success) !important;
+  border: none !important;
+}
+
+html body .MuiChip-colorWarning,
+html body [class*='status-warning'] {
+  background-color: color-mix(in srgb, var(--cv-warning) 16%, transparent) !important;
+  color: var(--cv-warning) !important;
+  border: none !important;
+}
+
+html body .MuiChip-colorError,
+html body [class*='status-error'] {
+  background-color: color-mix(in srgb, var(--cv-error) 16%, transparent) !important;
+  color: var(--cv-error) !important;
+  border: none !important;
+}
+
+/* 延迟状态颜色 */
+html body [class*='latency-fast'] {
+  color: var(--cv-latency-fast) !important;
+}
+html body [class*='latency-medium'] {
+  color: var(--cv-latency-medium) !important;
+}
+html body [class*='latency-slow'] {
+  color: var(--cv-latency-slow) !important;
+}
+html body [class*='latency-timeout'],
+html body [class*='latency-error'] {
+  color: var(--cv-latency-timeout) !important;
+}
+
+/* Body 变量映射 */
+body {
+  --background-color: var(--cv-bg-primary) !important;
+  --divider-color: var(--cv-outline-variant) !important;
+  --primary-main: var(--cv-primary) !important;
+  --text-primary: var(--cv-text-primary) !important;
+  --selection-color: var(--cv-selection-fg) !important;
+  --scroller-color: var(--cv-scrollbar-thumb) !important;
+  --background-color-alpha: var(--cv-primary-container) !important;
+  --window-border-color: var(--cv-outline) !important;
+  --scrollbar-bg: var(--cv-scrollbar-bg) !important;
+  --scrollbar-thumb: var(--cv-scrollbar-thumb) !important;
+  --border-radius: var(--cv-radius-md) !important;
+
+  --cv-surface-app: var(--cv-bg-primary) !important;
+  --cv-surface-page: var(--cv-bg-primary) !important;
+  --cv-surface-content: var(--cv-bg-primary) !important;
+  --cv-surface-sidebar: var(--cv-bg-secondary) !important;
+  --cv-surface-dialog: var(--cv-surface-elevated) !important;
+  --cv-surface-item: var(--cv-surface) !important;
+  --cv-surface-nav-active: var(--cv-secondary-container) !important;
+  --cv-color-accent: var(--cv-primary) !important;
+  --cv-color-accent-muted: var(--cv-surface) !important;
+  --cv-color-secondary: var(--cv-secondary) !important;
+  --cv-color-text-primary: var(--cv-text-primary) !important;
+  --cv-color-text-secondary: var(--cv-text-secondary) !important;
+  --cv-color-info: var(--cv-primary) !important;
+  --cv-color-success: var(--cv-success) !important;
+  --cv-color-warning: var(--cv-warning) !important;
+  --cv-color-error: var(--cv-error) !important;
+
+  background-color: var(--cv-bg-primary) !important;
+  color: var(--cv-text-primary) !important;
+  font-family: var(--cv-font-sans);
+}
+
+/* 布局容器颜色覆盖 */
+html body .MuiPaper-root.layout,
+html body .layout {
+  background-color: var(--cv-bg-primary) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+html body .layout .layout-content__left {
+  background-color: var(--cv-surface-container-low) !important;
+  border-right: 1px solid var(--cv-outline-variant) !important;
+}
+
+html body .layout .layout-content__right,
+html body .the-content {
+  background-color: var(--cv-bg-primary) !important;
+}
+
+html body .base-page > header {
+  background-color: transparent !important;
+  border-bottom: 1px solid var(--cv-outline-variant) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+html body .base-page .base-container,
+html body .base-page .base-container > section,
+html body .base-container,
+html body .base-container > section {
+  background-color: var(--cv-bg-primary) !important;
+  background-image: var(--cv-ambient) !important;
+  background-attachment: fixed !important;
+  background-repeat: repeat !important;
+}
+
+html body .base-content {
+  color: var(--cv-text-primary) !important;
+}
+
+/* 内容卡片颜色覆盖 */
+html body .base-content .MuiGrid-grid-xs-6 > .MuiBox-root,
+html body .base-content .MuiGrid-root > .MuiBox-root {
+  background-color: var(--cv-surface-card) !important;
+  border: 1px solid var(--cv-outline-variant) !important;
+  border-radius: var(--cv-radius-md) !important;
+  color: var(--cv-text-primary) !important;
+  box-shadow: var(--cv-elevation-1) !important;
+  overflow: hidden;
+}
+
+html body .enhanced-card,
+html body .cv-card {
+  background-color: var(--cv-surface-card) !important;
+  border: 1px solid var(--cv-outline-variant) !important;
+  border-radius: var(--cv-radius-md) !important;
+  box-shadow: var(--cv-elevation-1) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+/* 列表与文字 */
+html body .MuiListSubheader-root {
+  color: var(--cv-text-secondary) !important;
+  background-color: transparent !important;
+}
+
+html body .MuiTypography-root {
+  color: var(--cv-text-primary);
+}
+
+html body .MuiListItemText-secondary,
+html body .MuiTypography-colorTextSecondary {
+  color: var(--cv-text-secondary) !important;
+}
+
+html body .MuiDivider-root {
+  border-color: var(--cv-outline-variant) !important;
+}
+
+/* 对话框与遮罩层 */
+html body .MuiDialog-root .MuiDialog-paper,
+html body .MuiModal-root .MuiDialog-paper,
+html body div.MuiDialog-paper {
+  background-color: var(--cv-surface-container-high) !important;
+  border: none !important;
+  border-radius: var(--cv-radius-xl) !important;
+  color: var(--cv-text-primary) !important;
+}
+
+html body .MuiBackdrop-root {
+  background-color: rgba(0, 0, 0, 0.55) !important;
+}
+
+/* Paper 通用 */
+html body .MuiPaper-root:not(.layout) {
+  background-color: var(--cv-surface-elevated) !important;
+  border-color: var(--cv-outline-variant) !important;
+  color: var(--cv-text-primary);
+  box-shadow: var(--cv-elevation-1) !important;
+}
+
+/* 按钮颜色覆盖 */
+html body .MuiButton-containedPrimary,
+html body .MuiButtonGroup-groupedContainedPrimary {
+  background-color: var(--cv-primary) !important;
+  color: var(--cv-on-primary) !important;
+  box-shadow: var(--cv-elevation-1) !important;
+}
+
+html body .MuiButton-outlinedPrimary {
+  border-color: var(--cv-outline) !important;
+  color: var(--cv-primary) !important;
+}
+
+/* 开关颜色覆盖 */
+html body .MuiSwitch-switchBase.Mui-checked {
+  color: var(--cv-on-primary) !important;
+}
+
+html body .MuiSwitch-switchBase.Mui-checked .MuiSwitch-thumb {
+  background-color: var(--cv-on-primary) !important;
+  color: var(--cv-on-primary) !important;
+  box-shadow: var(--cv-elevation-1) !important;
+}
+
+html body .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
+  background-color: var(--cv-primary) !important;
+  opacity: 1 !important;
+  box-shadow: none !important;
+}
+
+html body .MuiSwitch-track {
+  opacity: 1;
+  background-color: var(--cv-surface-container-highest) !important;
+}
+
+/* 菜单选中状态与 Logo */
+html body .the-menu .MuiListItemButton-root.Mui-selected {
+  background: var(--cv-secondary-container) !important;
+}
+
+html body .the-logo svg,
+html body .the-logo .st1 {
+  fill: var(--cv-text-primary) !important;
+}
+
+/* 选中文本与滚动条 */
+html body ::selection {
+  color: var(--cv-on-primary);
+  background-color: var(--cv-primary);
+}
+
+html body *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background: var(--cv-scrollbar-bg) !important;
+}
+
+html body *::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background-color: var(--cv-scrollbar-thumb) !important;
+}
+
+/* 主色说明 */
+/* 主色（选中高亮、按钮、延迟等）由 Clash Verge 设置 → 主题设置 → 主要颜色 驱动，
+   不在 CSS 里强制覆盖，避免与用户调色冲突。本皮肤只负责 MD3 的
+   圆角 / 阴影 / 字体等外观细节。 */
+
+/* ============================================================
+   配套色值备忘（填入 Clash Verge → 设置 → 主题设置 → 各颜色项）
+   ------------------------------------------------------------
+   深色模式 Dark
+   ------------------------------------------------------------
+   主要颜色       #D0BCFF
+   次要颜色       #CCC2DC
+   文本主要颜色   #E6E0E9
+   文本次要颜色   #CAC4D0
+   信息颜色       #D0BCFF
+   警告颜色       #F5C25B
+   错误颜色       #F2B8B5
+   成功颜色       #8BD8A0
+   ------------------------------------------------------------
+   浅色模式 Light
+   ------------------------------------------------------------
+   主要颜色       #6750A4
+   次要颜色       #625B71
+   文本主要颜色   #1D1B20
+   文本次要颜色   #49454F
+   信息颜色       #6750A4
+   警告颜色       #9A6700
+   错误颜色       #B3261E
+   成功颜色       #1E8E4E
+   ============================================================ */
