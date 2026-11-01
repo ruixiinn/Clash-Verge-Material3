@@ -6,8 +6,6 @@
 - 全圆角控件、胶囊 Chip、elevation 层级阴影
 - 通过 Clash Verge 官方 **CSS Injection** 即可使用，无需改源码
 
----
-
 ## 主题预览
 
 ### 深色模式
