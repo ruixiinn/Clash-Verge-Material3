@@ -12,15 +12,15 @@
 
 ### 深色模式
 
-| 首页    | 代理    | 订阅    |
-| ----- | ----- | ----- |
-| 深色-首页 | 深色-代理 | 深色-订阅 |
+| 首页 | 代理 | 订阅 |
+|------|------|------|
+| ![深色-首页](docs/screenshots/01-home-dark.png) | ![深色-代理](docs/screenshots/02-proxies-dark.png) | ![深色-订阅](docs/screenshots/03-profiles-dark.png) |
 
 ### 浅色模式
 
-| 首页    | 代理    | 订阅    |
-| ----- | ----- | ----- |
-| 浅色-首页 | 浅色-代理 | 浅色-订阅 |
+| 首页 | 代理 | 订阅 |
+|------|------|------|
+| ![浅色-首页](docs/screenshots/04-home-light.png) | ![浅色-代理](docs/screenshots/05-proxies-light.png) | ![浅色-订阅](docs/screenshots/06-profiles-light.png) |
 
 > 截图中的节点均为演示占位数据，不含任何真实节点或订阅信息。
 
