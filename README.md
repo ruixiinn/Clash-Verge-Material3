@@ -22,19 +22,17 @@
 |------|------|------|
 | ![浅色-首页](docs/screenshots/04-home-light.png) | ![浅色-代理](docs/screenshots/05-proxies-light.png) | ![浅色-订阅](docs/screenshots/06-profiles-light.png) |
 
-### 主题设置（主配色 + CSS 注入位置）
-
-<img src="docs/screenshots/07-theme-settings.png" alt="主题设置" width="480">
-
 > 截图中的节点均为演示占位数据，不含任何真实节点或订阅信息。
 
 ---
 
-## 快速开始（30 秒）
+## 使用与配色
+
+### 快速开始（30 秒）
 
 1. 打开 **Clash Verge** → **设置** → **外观设置 / Theme Setting** → **编辑 CSS**
 2. 粘贴下面这一行代码
-3. 主题模式建议**固定为深色**
+3. 主题模式建议**固定配色**（不选「跟随系统」），并按下方 [配色说明](#配色说明重要) 设置主配色
 4. 保存并重启 Clash Verge
 
 ```css
@@ -43,11 +41,13 @@
 
 > 请使用版本标签（如 `@v1.0.0`）或具体 commit，不要用 `@main`，避免 CDN 缓存到旧文件。
 
----
-
-## 配色说明（重要）
+### 配色说明（重要）
 
 本主题的**主色 / 状态色由 Clash Verge 的「主题设置」颜色选择器驱动**，不在 CSS 里强制覆盖。请按下表在 **设置 → 主题设置** 中手动填写一次（深色、浅色各填一次）。
+
+主题设置界面如下：
+
+![主题设置](docs/screenshots/07-theme-settings.png)
 
 ### 深色模式（Dark）
 
