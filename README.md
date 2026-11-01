@@ -1,14 +1,10 @@
 # Clash Verge — Material Design 3 主题
 
----
-
 免费开源的 **Clash Verge Rev CSS 主题**，基于 **Google Material Design 3 (M3)** 设计语言，为 Clash Verge 带来统一、现代、克制的视觉风格。
 
 - 深色 / 浅色双主题，跟随系统自动切换
 - 全圆角控件、胶囊 Chip、elevation 层级阴影
 - 通过 Clash Verge 官方 **CSS Injection** 即可使用，无需改源码
-
----
 
 ## 主题预览
 
@@ -25,8 +21,6 @@
 | ![浅色-首页](docs/screenshots/04-home-light.png) | ![浅色-代理](docs/screenshots/05-proxies-light.png) | ![浅色-订阅](docs/screenshots/06-profiles-light.png) |
 
 > 截图中的节点均为演示占位数据，不含任何真实节点或订阅信息。
-
----
 
 ## 使用与配色
 
@@ -79,8 +73,6 @@
 
 > 以上色值来自 Google 官方 Material Theme Builder 的 Light/Dark 标准色板，对比度符合 WCAG 无障碍标准。
 
----
-
 ## 常见问题 FAQ
 
 **Q: 粘贴 `@import` 后没有变化？**  
@@ -91,8 +83,6 @@ A: GitHub raw 常以 `text/plain` 返回，浏览器可能直接忽略样式。�
 
 **Q: 支持浅色模式吗？**  
 A: CSS 已内置两套 M3 色板，但**主色需在「主题设置」里深浅各手动填一次**（深浅主色是分开存储的，不会自动映射）。若只想省事，建议把主题模式**固定为深色**，就不用管浅色配色了。
-
----
 
 ## 参考
 
